@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Onebank - Maqueta</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f5f7;
+      color: #273746;
+      min-height: 100vh;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      background: white;
+    }
+
+    /* =========================
+       PANEL IZQUIERDO
+    ========================== */
+
+    .login-section {
+      width: 50%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px;
+      background: #fff;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 570px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 38px;
+      user-select: none;
+    }
+
+    .logo-main {
+      font-size: 43px;
+      font-weight: 400;
+      color: #df111c;
+      letter-spacing: -4px;
+      font-style: italic;
+      line-height: 1;
+    }
+
+    .logo-bank {
+      font-size: 25px;
+      font-weight: 700;
+      color: #34495e;
+      margin-left: 9px;
+      margin-top: 10px;
+    }
+
+    .title {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 35px;
+      color: #273746;
+    }
+
+    /* =========================
+       CAMPOS
+    ========================== */
+
+    .field {
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    .field-icon {
+      position: absolute;
+      left: 2px;
+      top: 7px;
+      width: 25px;
+      height: 25px;
+      color: #5f6368;
+    }
+
+    .field input {
+      width: 100%;
+      height: 52px;
+      border: none;
+      border-bottom: 1px solid #888;
+      outline: none;
+      padding: 4px 8px 4px 40px;
+      font-size: 20px;
+      color: #333;
+      background: transparent;
+    }
+
+    .field input::placeholder {
+      color: #69757d;
+      opacity: 1;
+    }
+
+    .field input:focus {
+      border-bottom: 2px solid #c51c2b;
+    }
+
+    /* =========================
+       BOTÓN
+    ========================== */
+
+    .login-btn {
+      width: 100%;
+      height: 60px;
+      border-radius: 9px;
+      border: 1px solid #dce3ea;
+      background: #fafbfc;
+      color: #65717b;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all .2s ease;
+      margin-top: 0;
+    }
+
+    .login-btn:hover {
+      background: #f1f3f5;
+      border-color: #cbd3da;
+    }
+
+    .login-btn:active {
+      transform: scale(.99);
+    }
+
+    /* =========================
+       TARJETAS INFORMATIVAS
+    ========================== */
+
+    .info-card {
+      margin-top: 25px;
+      min-height: 80px;
+      border: 1px dashed #d6dce1;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      color: #3e464d;
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .info-icon {
+      width: 48px;
+      min-width: 48px;
+      margin-right: 20px;
+      text-align: center;
+      font-size: 34px;
+    }
+
+    .phone-icon {
+      color: #7048b9;
+    }
+
+    .megaphone-icon {
+      color: #079ed1;
+    }
+
+    .info-card strong {
+      color: #0784c2;
+    }
+
+    /* =========================
+       PANEL ROSADO
+    ========================== */
+
+    .promo-section {
+      width: 50%;
+      min-height: 100vh;
+      background: #ed91cf;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    /*
+      Persona representada como silueta decorativa
+      para mantener la maqueta independiente de imágenes externas.
+    */
+
+    .person {
+      position: relative;
+      width: 400px;
+      height: 700px;
+      margin-bottom: -80px;
+    }
+
+    .head {
+      position: absolute;
+      width: 190px;
+      height: 225px;
+      background: #d69a72;
+      border-radius: 48% 48% 45% 45%;
+      top: 55px;
+      left: 105px;
+      z-index: 3;
+    }
+
+    .hair {
+      position: absolute;
+      width: 215px;
+      height: 290px;
+      background: #241b1a;
+      border-radius: 48% 48% 35% 35%;
+      top: 25px;
+      left: 92px;
+      z-index: 2;
+    }
+
+    .hair::after {
+      content: "";
+      position: absolute;
+      width: 55px;
+      height: 250px;
+      right: -5px;
+      top: 70px;
+      background: #241b1a;
+      border-radius: 0 0 40px 40px;
+    }
+
+    .face {
+      position: absolute;
+      top: 115px;
+      left: 130px;
+      z-index: 5;
+      font-size: 34px;
+      letter-spacing: 12px;
+    }
+
+    .body {
+      position: absolute;
+      width: 350px;
+      height: 380px;
+      background: #db6d78;
+      border-radius: 90px 90px 0 0;
+      top: 295px;
+      left: 25px;
+      z-index: 1;
+    }
+
+    .arm {
+      position: absolute;
+      width: 80px;
+      height: 270px;
+      background: #d69a72;
+      border-radius: 45px;
+      transform: rotate(-16deg);
+      top: 300px;
+      left: 70px;
+      z-index: 4;
+    }
+
+    .cup {
+      position: absolute;
+      width: 82px;
+      height: 125px;
+      background: linear-gradient(#fff 0 22%, #f29aca 22%);
+      border-radius: 12px 12px 25px 25px;
+      top: 475px;
+      left: 125px;
+      z-index: 6;
+      box-shadow: 0 3px 8px rgba(0,0,0,.15);
+    }
+
+    .straw {
+      position: absolute;
+      width: 7px;
+      height: 100px;
+      background: #f5e7bc;
+      transform: rotate(-4deg);
+      top: 390px;
+      left: 164px;
+      z-index: 7;
+    }
+
+    /* =========================
+       AVISO DEMO
+    ========================== */
+
+    .demo-label {
+      position: fixed;
+      right: 15px;
+      bottom: 15px;
+      background: rgba(0,0,0,.72);
+      color: white;
+      padding: 8px 13px;
+      border-radius: 20px;
+      font-size: 12px;
+      z-index: 100;
+    }
+
+    /* =========================
+       MODAL
+    ========================== */
+
+    .message {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.45);
+      z-index: 200;
+      padding: 20px;
+    }
+
+    .message-box {
+      width: 100%;
+      max-width: 390px;
+      background: white;
+      border-radius: 14px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 15px 50px rgba(0,0,0,.25);
+    }
+
+    .message-box h2 {
+      margin-bottom: 12px;
+      color: #273746;
+    }
+
+    .message-box p {
+      color: #606a72;
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+
+    .close-btn {
+      border: none;
+      background: #df111c;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 900px) {
+
+      .page {
+        display: block;
+      }
+
+      .login-section {
+        width: 100%;
+        min-height: auto;
+        padding: 35px 25px;
+      }
+
+      .login-container {
+        max-width: 600px;
+      }
+
+      .promo-section {
+        width: 100%;
+        height: 470px;
+        min-height: 470px;
+      }
+
+      .person {
+        transform: scale(.72);
+        transform-origin: bottom center;
+        margin-bottom: -110px;
+      }
+    }
+
+    @media (max-width: 500px) {
+
+      .login-section {
+        padding: 30px 20px;
+      }
+
+      .logo-main {
+        font-size: 36px;
+      }
+
+      .logo-bank {
+        font-size: 21px;
+      }
+
+      .title {
+        font-size: 25px;
+        margin-bottom: 30px;
+      }
+
+      .field input {
+        font-size: 17px;
+      }
+
+      .info-card {
+        font-size: 14px;
+        padding: 14px;
+      }
+
+      .info-icon {
+        font-size: 28px;
+        margin-right: 12px;
+      }
+
+      .promo-section {
+        height: 390px;
+        min-height: 390px;
+      }
+
+      .person {
+        transform: scale(.55);
+        margin-bottom: -175px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <!-- =====================
+         LOGIN
+    ====================== -->
+
+    <section class="login-section">
+
+      <div class="login-container">
+
+        <div class="logo">
+          <span class="logo-main">DAVI</span>
+          <span class="logo-bank">bank</span>
+        </div>
+
+        <h1 class="title">
+          Bienvenido a Onebank
+        </h1>
+
+        <form id="demoForm">
+
+          <div class="field">
+
+            <div class="field-icon">
+              <svg viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.7">
+                <circle cx="12" cy="7" r="4"></circle>
+                <path d="M4 21c0-4.2 3.5-7 8-7s8 2.8 8 7"></path>
+              </svg>
+            </div>
+
+            <input
+              id="usuario"
+              type="text"
+              placeholder="Usuario"
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <div class="field-icon">
+              <svg viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="1.7">
+                <rect x="5" y="10" width="14" height="10"
+                      rx="1"></rect>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+                <circle cx="12" cy="15" r="1"></circle>
+              </svg>
+            </div>
+
+            <input
+              id="password"
+              type="password"
+              placeholder="Contraseña"
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <button
+            class="login-btn"
+            type="submit">
+            Ingresar
+          </button>
+
+        </form>
+
+
+        <!-- TARJETA 1 -->
+
+        <div class="info-card">
+
+          <div class="info-icon phone-icon">
+            ☎
+          </div>
+
+          <div>
+            Si tienes problemas con tu contraseña
+            comunícate con la mesa de ayuda.
+            <br>
+            Tel: 7456300 ext 4545
+          </div>
+
+        </div>
+
+
+        <!-- TARJETA 2 -->
+
+        <div class="info-card">
+
+          <div class="info-icon megaphone-icon">
+            📣
+          </div>
+
+          <div>
+            DAVIbank tiene un aviso importante para ti.
+            <strong>Lee más aquí</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================
+         PANEL ROSADO
+    ====================== -->
+
+    <section class="promo-section">
+
+      <div class="person">
+
+        <div class="hair"></div>
+
+        <div class="head"></div>
+
+        <div class="face">
+          ◡
+        </div>
+
+        <div class="body"></div>
+
+        <div class="arm"></div>
+
+        <div class="straw"></div>
+
+        <div class="cup"></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <div class="demo-label">
+    MAQUETA DEMOSTRATIVA
+  </div>
+
+
+  <!-- =====================
+       MENSAJE
+  ====================== -->
+
+  <div
+    class="message"
+    id="message">
+
+    <div class="message-box">
+
+      <h2>Maqueta demostrativa</h2>
+
+      <p>
+        Esta es una demostración visual.
+        El formulario no envía ni almacena
+        datos de acceso.
+      </p>
+
+      <button
+        class="close-btn"
+        onclick="closeMessage()">
+        Cerrar
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================
+       JAVASCRIPT
+  ====================== -->
+
+  <script>
+
+    const form = document.getElementById("demoForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+      /*
+        DEMO:
+        No se envían los datos a ningún servidor.
+      */
+
+      message.style.display = "flex";
+
+    });
+
+
+    function closeMessage() {
+
+      message.style.display = "none";
+
+    }
+
+
+    // Cerrar haciendo clic fuera del cuadro
+
+    message.addEventListener("click", function(event) {
+
+      if (event.target === message) {
+        closeMessage();
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
